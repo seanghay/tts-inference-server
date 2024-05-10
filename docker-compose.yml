@@ -7,18 +7,37 @@ services:
     ports:
       - "8000:80"
     depends_on:
-      - api_1
-      - api_2
-      - api_3
-  api_1:
-    build: .
+      - api_cuda_1
+      - api_cuda_2
+      - api
+  
+  api_cuda_1:
+    image: ghcr.io/seanghay/tts-inference-server:main
     restart: unless-stopped
     command: gunicorn server:app --worker-class uvicorn.workers.UvicornWorker --workers 1 --bind 0.0.0.0:80
-  api_2:
-    build: .
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ '0' ]
+              capabilities: [ gpu ]
+
+  api_cuda_2:
+    image: ghcr.io/seanghay/tts-inference-server:main
     restart: unless-stopped
     command: gunicorn server:app --worker-class uvicorn.workers.UvicornWorker --workers 1 --bind 0.0.0.0:80
-  api_3:
-    build: .
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ '1' ]
+              capabilities: [ gpu ]
+
+
+  # cpu with 4 workers
+  api:
+    image: ghcr.io/seanghay/tts-inference-server:main
     restart: unless-stopped
-    command: gunicorn server:app --worker-class uvicorn.workers.UvicornWorker --workers 1 --bind 0.0.0.0:80
+    command: gunicorn server:app --worker-class uvicorn.workers.UvicornWorker --workers 4 --bind 0.0.0.0:80
