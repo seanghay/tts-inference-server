@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir --disable-pip-version-check unidecode
 
 COPY . .
 
-RUN wget https://github.com/seanghay/tts-inference-server/releases/download/1.0.0/pretrained_ljs_sim.onnx .
+RUN wget https://github.com/seanghay/tts-inference-server/releases/download/1.0.0/pretrained_ljs_sim.onnx
