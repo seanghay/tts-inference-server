@@ -9,8 +9,9 @@ RUN apt-get update && apt-get install \
   libsox-fmt-mp3 \
   cmake \
   espeak \
-  git -y
-
+  git \
+  wget -y
+  
 RUN pip install -U --no-cache-dir pip
 COPY requirements.txt .
 RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt
