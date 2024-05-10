@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
+FROM pytorch/pytorch
 
 RUN apt-get update && apt-get install \
   build-essential \
