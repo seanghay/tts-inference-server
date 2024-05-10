@@ -1,8 +1,9 @@
 fastapi
 gunicorn
 uvicorn[standard]
-onnxruntime
+onnxruntime-gpu
 librosa
 phonemizer==2.2.1
 scipy
 pydub
+unidecode
