@@ -1,0 +1,8 @@
+fastapi
+gunicorn
+uvicorn[standard]
+onnxruntime
+librosa
+phonemizer==2.2.1
+scipy
+pydub
